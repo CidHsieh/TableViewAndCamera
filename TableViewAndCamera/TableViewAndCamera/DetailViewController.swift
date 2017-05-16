@@ -8,35 +8,50 @@
 
 import UIKit
 
+//設protocol將檔名回傳到ViewController
+protocol DetailViewControllerDelegate {
+    func savedFileName(fileName: String)
+}
+
 class DetailViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     @IBOutlet weak var cameraImageView: UIImageView!
     
     @IBOutlet weak var descriptionTextField: UITextField!
+    
+    var delegate:DetailViewControllerDelegate?
+    
     //接收穿過來的Image
     var newImage: UIImage!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         cameraImageView.image = newImage
-
     }
     
-    @IBAction func cameraButton(_ sender: UIButton) {
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        imagePicker.sourceType = UIImagePickerControllerSourceType.camera
-        imagePicker.allowsEditing = false
-        self.present(imagePicker, animated: true)
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         
-    }
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let selectedimage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            cameraImageView.image = selectedimage
+        //回到前一頁要執行的動作        
+        // 1. 回傳檔名
+        delegate?.savedFileName(fileName: descriptionTextField.text!)
+        
+        // 2. 存圖片，要存的是 Data
+        let filePath = NSHomeDirectory() + "/Documents/" + "\(descriptionTextField.text!).data" //存擋的路徑
+        let fileURL = URL(fileURLWithPath: filePath) // 存擋的 URL
+        if let imageToSave = cameraImageView.image {
+            let dataToSave = UIImageJPEGRepresentation(imageToSave, 1.0) // 先轉成 data
+            do{
+                try dataToSave?.write(to: fileURL) // 存檔到資料夾
+                print("is saved")
+                print(filePath)
+            }catch{
+            }
         }
-        self.dismiss(animated: true, completion: nil)
     }
+    
+
+    
     
 
 

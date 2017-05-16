@@ -8,9 +8,11 @@
 
 import UIKit
 
-class ViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+class ViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, DetailViewControllerDelegate {
     
     var dataArray = [String]()
+    let filePath = NSHomeDirectory() + "/Documents/" + "FileNameArray.txt" // 找到存擋路徑
+
     
     @IBOutlet weak var myTableView: UITableView!
 
@@ -18,12 +20,30 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         super.viewDidLoad()
         myTableView.delegate = self
         myTableView.dataSource = self
+        
+        //讀取 Array
+        if let loadedArray = NSArray(contentsOfFile: filePath) as? [String] {
+            print(loadedArray)
+            dataArray = loadedArray
+        }
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         myTableView.reloadData()
         
     }
+    
+    //實作protocol，將檔名存入陣列中
+    func savedFileName(fileName: String) {
+        dataArray.append(fileName)
+        print(dataArray)
+        
+        //存 Array
+        let arrayToSave = NSArray(array: dataArray) //轉成 NSArray
+        arrayToSave.write(toFile: filePath, atomically: true) // 存入資料夾
+        print(filePath)
+    }
+    
     //按下+開啟相機
     @IBAction func cameraButton(_ sender: UIBarButtonItem) {
         let imagePicker = UIImagePickerController()
@@ -42,6 +62,9 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         }
         self.dismiss(animated: true, completion: nil)
         self.navigationController?.pushViewController(pushViewController, animated: true)
+        
+        //將DetailViewController的delegate設為自己
+        pushViewController.delegate = self
 
     }
     
@@ -59,6 +82,10 @@ extension ViewController: UITableViewDelegate{
 extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableViewCell
+        cell.myLabel.text = dataArray[indexPath.row]
+        //讀出圖片
+        let filePath = NSHomeDirectory() + "/Documents/" + "\(dataArray[indexPath.row]).data"
+        cell.myImageView.image = UIImage(contentsOfFile: filePath)
         
         return cell
     }
