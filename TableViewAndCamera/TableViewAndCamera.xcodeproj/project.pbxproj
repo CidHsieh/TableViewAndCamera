@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		842180DC1ECB935D00969990 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842180DB1ECB935D00969990 /* ShareViewController.swift */; };
 		84A54D491ECB2C0C00FBF4A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A54D481ECB2C0C00FBF4A7 /* AppDelegate.swift */; };
 		84A54D4B1ECB2C0C00FBF4A7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A54D4A1ECB2C0C00FBF4A7 /* ViewController.swift */; };
 		84A54D4E1ECB2C0C00FBF4A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84A54D4C1ECB2C0C00FBF4A7 /* Main.storyboard */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		842180DB1ECB935D00969990 /* ShareViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
 		84A54D451ECB2C0C00FBF4A7 /* TableViewAndCamera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TableViewAndCamera.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84A54D481ECB2C0C00FBF4A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84A54D4A1ECB2C0C00FBF4A7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 				84A54D4C1ECB2C0C00FBF4A7 /* Main.storyboard */,
 				84A54D5A1ECB3DC500FBF4A7 /* TableViewCell.swift */,
 				84A54D5C1ECB475000FBF4A7 /* DetailViewController.swift */,
+				842180DB1ECB935D00969990 /* ShareViewController.swift */,
 				84A54D4F1ECB2C0C00FBF4A7 /* Assets.xcassets */,
 				84A54D511ECB2C0C00FBF4A7 /* LaunchScreen.storyboard */,
 				84A54D541ECB2C0C00FBF4A7 /* Info.plist */,
@@ -145,6 +148,7 @@
 			files = (
 				84A54D5B1ECB3DC500FBF4A7 /* TableViewCell.swift in Sources */,
 				84A54D4B1ECB2C0C00FBF4A7 /* ViewController.swift in Sources */,
+				842180DC1ECB935D00969990 /* ShareViewController.swift in Sources */,
 				84A54D491ECB2C0C00FBF4A7 /* AppDelegate.swift in Sources */,
 				84A54D5D1ECB475000FBF4A7 /* DetailViewController.swift in Sources */,
 			);
@@ -312,6 +316,7 @@
 				84A54D591ECB2C0C00FBF4A7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

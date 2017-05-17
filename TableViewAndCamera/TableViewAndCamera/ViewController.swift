@@ -68,8 +68,6 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
 
     }
     
-    
-    
 }
 extension ViewController: UITableViewDelegate{
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -78,6 +76,15 @@ extension ViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataArray.count
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+        let pushViewController = storyboard.instantiateViewController(withIdentifier: "ShareViewController") as! ShareViewController
+        pushViewController.indexNumber = indexPath.row
+        pushViewController.photoDescription = dataArray[indexPath.row]
+        self.navigationController?.pushViewController(pushViewController, animated: true)
+        
+    }
+    
 }
 extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -88,6 +95,19 @@ extension ViewController: UITableViewDataSource {
         cell.myImageView.image = UIImage(contentsOfFile: filePath)
         
         return cell
+    }
+    
+    //滑動刪除
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.delete {
+            dataArray.remove(at: indexPath.row)
+            myTableView.deleteRows(at: [indexPath], with: .left)
+            
+            let arrayToSave = NSArray(array: dataArray) //轉成 NSArray
+            arrayToSave.write(toFile: filePath, atomically: true) // 存入資料夾
+            
+        }
+        
     }
 }
 
