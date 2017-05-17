@@ -60,9 +60,9 @@
 		84A54D471ECB2C0C00FBF4A7 /* TableViewAndCamera */ = {
 			isa = PBXGroup;
 			children = (
+				84A54D4C1ECB2C0C00FBF4A7 /* Main.storyboard */,
 				84A54D481ECB2C0C00FBF4A7 /* AppDelegate.swift */,
 				84A54D4A1ECB2C0C00FBF4A7 /* ViewController.swift */,
-				84A54D4C1ECB2C0C00FBF4A7 /* Main.storyboard */,
 				84A54D5A1ECB3DC500FBF4A7 /* TableViewCell.swift */,
 				84A54D5C1ECB475000FBF4A7 /* DetailViewController.swift */,
 				842180DB1ECB935D00969990 /* ShareViewController.swift */,

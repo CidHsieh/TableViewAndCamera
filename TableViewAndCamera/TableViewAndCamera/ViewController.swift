@@ -12,7 +12,6 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     
     var dataArray = [String]()
     let filePath = NSHomeDirectory() + "/Documents/" + "FileNameArray.txt" // 找到存擋路徑
-
     
     @IBOutlet weak var myTableView: UITableView!
 
@@ -27,13 +26,13 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
             dataArray = loadedArray
         }
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         myTableView.reloadData()
-        
     }
     
-    //實作protocol，將檔名存入陣列中
+    //實作protocol，將DetailViewController傳來的檔名存入陣列中
     func savedFileName(fileName: String) {
         dataArray.append(fileName)
         print(dataArray)
@@ -48,7 +47,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     @IBAction func cameraButton(_ sender: UIBarButtonItem) {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
-        imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        imagePicker.sourceType = UIImagePickerControllerSourceType.camera
         imagePicker.allowsEditing = false
         self.present(imagePicker, animated: true, completion: nil)
     }
@@ -65,27 +64,28 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         
         //將DetailViewController的delegate設為自己
         pushViewController.delegate = self
-
     }
     
 }
-extension ViewController: UITableViewDelegate{
+
+extension ViewController: UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataArray.count
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
         let pushViewController = storyboard.instantiateViewController(withIdentifier: "ShareViewController") as! ShareViewController
         pushViewController.indexNumber = indexPath.row
         pushViewController.photoDescription = dataArray[indexPath.row]
         self.navigationController?.pushViewController(pushViewController, animated: true)
-        
     }
-    
 }
+
 extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableViewCell
@@ -93,7 +93,6 @@ extension ViewController: UITableViewDataSource {
         //讀出圖片
         let filePath = NSHomeDirectory() + "/Documents/" + "\(dataArray[indexPath.row]).data"
         cell.myImageView.image = UIImage(contentsOfFile: filePath)
-        
         return cell
     }
     
@@ -102,12 +101,9 @@ extension ViewController: UITableViewDataSource {
         if editingStyle == UITableViewCellEditingStyle.delete {
             dataArray.remove(at: indexPath.row)
             myTableView.deleteRows(at: [indexPath], with: .left)
-            
             let arrayToSave = NSArray(array: dataArray) //轉成 NSArray
             arrayToSave.write(toFile: filePath, atomically: true) // 存入資料夾
-            
         }
-        
     }
 }
 

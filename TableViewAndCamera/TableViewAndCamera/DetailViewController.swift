@@ -49,11 +49,4 @@ class DetailViewController: UIViewController, UINavigationControllerDelegate, UI
             }
         }
     }
-    
-
-    
-    
-
-
-
 }

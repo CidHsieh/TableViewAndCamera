@@ -38,6 +38,7 @@ class ShareViewController: UIViewController, UIScrollViewDelegate {
         imageView?.image = loadImage
         myLabel.text = photoDescription
     }
+    
     //讓圖片可以縮放
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return imageView
@@ -52,8 +53,4 @@ class ShareViewController: UIViewController, UIScrollViewDelegate {
             
         }
     }
-    
-    
-
-
 }
