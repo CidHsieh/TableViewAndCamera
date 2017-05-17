@@ -43,6 +43,17 @@ class ShareViewController: UIViewController, UIScrollViewDelegate {
         return imageView
     }
     
+    //新增內建分享功能，分享照片與文字
+    @IBAction func shareButtonDidPressed(_ sender: UIBarButtonItem) {
+        let defaultText = dataArray[indexNumber]
+        if let imageToShare = UIImage(contentsOfFile: NSHomeDirectory() + "/Documents/" + "\(dataArray[indexNumber]).data") {
+            let activityController = UIActivityViewController(activityItems: [defaultText, imageToShare], applicationActivities: nil)
+            self.present(activityController, animated: true, completion: nil)
+            
+        }
+    }
+    
+    
 
 
 }

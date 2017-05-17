@@ -48,7 +48,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     @IBAction func cameraButton(_ sender: UIBarButtonItem) {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
-        imagePicker.sourceType = UIImagePickerControllerSourceType.camera
+        imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
         imagePicker.allowsEditing = false
         self.present(imagePicker, animated: true, completion: nil)
     }

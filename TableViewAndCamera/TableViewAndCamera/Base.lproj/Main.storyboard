@@ -170,7 +170,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="awO-7b-7RL">
-                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="tbC-Ft-Rhh"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="tbC-Ft-Rhh">
+                            <connections>
+                                <action selector="shareButtonDidPressed:" destination="RVx-mg-xZX" id="Va0-cF-yt7"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="myLabel" destination="FxS-gq-7Ny" id="o5S-Qa-NGO"/>
